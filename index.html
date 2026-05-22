@@ -9,66 +9,53 @@
   </head>
   <body data-theme="dark">
     <div class="app-shell">
-      <header class="hero no-print">
-        <div class="hero-top">
-          <div class="brand-lockup" aria-label="Rumo Qualidade">
-            <div class="brand-mark">rumo</div>
-            <div>
-              <strong>Academia da Qualidade</strong>
-              <span>Flashcards • Procedimentos • Simulado</span>
-            </div>
+      <header class="topbar no-print">
+        <div class="brand-lockup" aria-label="Rumo Qualidade">
+          <div class="brand-mark">rumo</div>
+          <div>
+            <strong>Academia da Qualidade</strong>
+            <span>Flashcards • Procedimentos • Simulado</span>
           </div>
-          <button id="themeToggle" class="outline light-toggle" type="button">☀️ Tema claro</button>
         </div>
-
-        <span class="eyebrow">mini curso interativo</span>
-        <h1>Treine critérios de inspeção com flashcards rápidos.</h1>
-        <p>
-          O fiscal escolhe a área, estuda situações reais do procedimento, vira o card para conferir a conduta correta
-          e finaliza com um teste de 10 questões para gerar o parecer de participação.
-        </p>
-        <div class="hero-tags" id="heroTags"></div>
+        <button id="themeToggle" class="outline light-toggle" type="button">☀️ Tema claro</button>
       </header>
 
       <main class="content">
-        <section id="registrationPanel" class="panel registration-card">
-          <div class="section-head">
-            <div>
-              <span class="section-kicker">cadastro inicial</span>
-              <h2>Identificação do fiscal</h2>
-              <p class="muted">Esses dados aparecem no parecer final do mini curso.</p>
+        <section id="landingPanels" class="landing-panels no-print">
+          <article class="panel intro-panel">
+            <h1>Mini-Curso Qualidade dos Materiais</h1>
+          </article>
+
+          <section id="registrationPanel" class="panel registration-card">
+            <div class="section-head">
+              <div>
+                <span class="section-kicker">cadastro inicial</span>
+                <h2>Identificação do fiscal</h2>
+                <p class="muted">Esses dados aparecem no parecer final do mini curso.</p>
+              </div>
             </div>
-          </div>
 
-          <form id="registrationForm" class="form-grid form-grid-expanded">
-            <label>
-              Nome do fiscal
-              <input id="studentName" name="studentName" type="text" placeholder="Ex.: João da Silva" autocomplete="name" required />
-            </label>
+            <form id="registrationForm" class="form-grid">
+              <label>
+                Nome do fiscal
+                <input id="studentName" name="studentName" type="text" placeholder="Ex.: João da Silva" autocomplete="name" required />
+              </label>
 
-            <label>
-              Qual área atua
-              <select id="studentArea" name="studentArea" required>
-                <option value="">Selecione...</option>
-                <option>Fiscalização da Qualidade</option>
-                <option>Qualidade de Materiais</option>
-                <option>Operação de Via</option>
-                <option>Modernização</option>
-                <option>Engenharia de Via Permanente</option>
-                <option>PCM</option>
-                <option>Outra</option>
-              </select>
-            </label>
+              <label>
+                Qual área atua
+                <select id="studentArea" name="studentArea" required></select>
+              </label>
 
-            <label>
-              Área para estudar / testar
-              <select id="trainingArea" name="trainingArea" required></select>
-            </label>
+              <label>
+                Área para estudar / testar
+                <select id="trainingArea" name="trainingArea" required></select>
+              </label>
 
-            <div class="form-action">
-              <button class="success full" type="submit">Começar mini curso</button>
-            </div>
-          </form>
+              <div class="form-action">
+                <button class="success full" type="submit">Começar mini curso</button>
+              </div>
+            </form>
+          </section>
         </section>
 
         <section id="coursePanel" class="course hidden">
@@ -187,9 +174,7 @@
       </main>
 
       <footer class="footer no-print">
-        <p>
-          Conteúdo inicial: PO-SPE-160 R1 — Inspeção de Dormente de Concreto para Reparo e Refugo em Fábrica e Pátio.
-        </p>
+        <p>Site pronto para GitHub Pages e atualizado com todas as áreas cadastradas até o momento.</p>
       </footer>
     </div>
 

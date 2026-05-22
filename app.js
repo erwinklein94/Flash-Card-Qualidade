@@ -1,5 +1,6 @@
 const STORAGE_KEY = 'rumo_flashcards_quality_registration_v1';
 const PROGRESS_KEY = 'rumo_flashcards_quality_progress_v1';
+const STUDENT_AREA_OPTIONS = ['Dormente de concreto', 'Dormente de madeira', 'AMV', 'Brita', 'Subcomponentes'];
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
@@ -16,7 +17,7 @@ const state = {
 
 const elements = {
   themeToggle: $('#themeToggle'),
-  heroTags: $('#heroTags'),
+  landingPanels: $('#landingPanels'),
   registrationPanel: $('#registrationPanel'),
   registrationForm: $('#registrationForm'),
   studentName: $('#studentName'),
@@ -58,8 +59,8 @@ const elements = {
 
 function init() {
   hydrateTheme();
+  renderStudentAreaOptions();
   renderAreaOptions();
-  renderHeroTags();
   attachEvents();
   restoreRegistration();
 }
@@ -93,14 +94,19 @@ function renderAreaOptions() {
   });
 }
 
-function renderHeroTags() {
-  const tags = [
-    `${TRAINING_DATA.length} área inicial`,
-    `${TRAINING_DATA.reduce((sum, item) => sum + item.flashcards.length, 0)} flashcards`,
-    '10 questões no simulado',
-    'Pronto para GitHub Pages',
-  ];
-  elements.heroTags.innerHTML = tags.map((tag) => `<span>${tag}</span>`).join('');
+function renderStudentAreaOptions() {
+  elements.studentArea.innerHTML = '';
+  const placeholder = document.createElement('option');
+  placeholder.value = '';
+  placeholder.textContent = 'Selecione...';
+  elements.studentArea.appendChild(placeholder);
+
+  STUDENT_AREA_OPTIONS.forEach((area) => {
+    const option = document.createElement('option');
+    option.value = area;
+    option.textContent = area;
+    elements.studentArea.appendChild(option);
+  });
 }
 
 function attachEvents() {
@@ -174,6 +180,7 @@ function startCourse() {
   state.currentCardIndex = Math.min(state.currentCardIndex, Math.max(state.cards.length - 1, 0));
   state.flipped = false;
 
+  elements.landingPanels.classList.add('hidden');
   elements.registrationPanel.classList.add('hidden');
   elements.coursePanel.classList.remove('hidden');
   elements.studyPanel.classList.remove('hidden');
@@ -196,12 +203,24 @@ function getSelectedContent(areaId) {
     : TRAINING_DATA.filter((item) => item.id === areaId);
 
   const cards = selected.flatMap((item) => item.flashcards.map((card) => ({ ...card, area: item.area, document: item.document })));
-  const quiz = selected.flatMap((item) => item.quiz.map((question) => ({ ...question, area: item.area, document: item.document })));
+  const quizPools = selected.map((item) => item.quiz.map((question) => ({ ...question, area: item.area, document: item.document })));
+  const quiz = selected.length > 1 ? interleaveQuiz(quizPools) : (quizPools[0] || []);
 
   const areaLabel = areaId === 'all' ? 'Todas as áreas disponíveis' : (selected[0]?.area || 'Área não encontrada');
   const documentLabel = selected.length === 1 ? `${selected[0].document} • ${selected[0].sourceLabel}` : `${selected.length} documentos selecionados`;
 
   return { cards, quiz, areaLabel, documentLabel };
+}
+
+function interleaveQuiz(pools) {
+  const output = [];
+  const maxLength = Math.max(...pools.map((pool) => pool.length), 0);
+  for (let index = 0; index < maxLength; index += 1) {
+    pools.forEach((pool) => {
+      if (pool[index]) output.push(pool[index]);
+    });
+  }
+  return output;
 }
 
 function renderCard() {
@@ -380,6 +399,7 @@ function retryQuiz() {
 }
 
 function backToRegister() {
+  elements.landingPanels.classList.remove('hidden');
   elements.registrationPanel.classList.remove('hidden');
   elements.coursePanel.classList.add('hidden');
   window.scrollTo({ top: 0, behavior: 'smooth' });

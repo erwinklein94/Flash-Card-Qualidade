@@ -1,6 +1,6 @@
 # Rumo | Academia da Qualidade — Flashcards
 
-Site estático para GitHub Pages com:
+Site estático para GitHub Pages com conteúdo inicial de Dormente de Concreto, Brita para Lastro e Dormente de Madeira:
 
 - cadastro inicial do fiscal;
 - seleção de área para estudo ou todas as áreas disponíveis;
@@ -51,6 +51,16 @@ O campo `answer` começa em zero: `0` é a primeira alternativa, `1` é a segund
 
 - `index.html`: estrutura do site.
 - `styles.css`: aparência visual.
-- `dados.js`: banco de flashcards e perguntas.
+- `dados.js`: banco de flashcards e perguntas. Nesta versão há áreas de Dormente de Concreto, Brita para Lastro e Dormente de Madeira.
 - `app.js`: lógica de cadastro, flashcards, simulado e parecer.
 - `.nojekyll`: evita processamento do GitHub Pages.
+
+
+## Atualização
+
+Incluída a área AMV - Aparelho de Mudança de Via.
+
+
+## Atualização - Subcomponentes de fixação
+
+Inclui flashcards e simulado para isoladores, capas, palmilhas, grampos, ombreiras e USP.

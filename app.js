@@ -66,7 +66,7 @@ function init() {
 }
 
 function hydrateTheme() {
-  const storedTheme = localStorage.getItem('rumo_flashcards_theme') || 'dark';
+  const storedTheme = localStorage.getItem('rumo_flashcards_theme') || 'light';
   document.body.setAttribute('data-theme', storedTheme);
   elements.themeToggle.textContent = storedTheme === 'dark' ? '☀️ Tema claro' : '🌙 Tema escuro';
 }
